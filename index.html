@@ -24,6 +24,7 @@
     font-size: 5rem;
     font-weight: bold;
     color: #8a2be2;
+    text-align: left; /* Align text to the left */
   }
   .footer {
     background-color: #8a2be2;
@@ -43,7 +44,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="dynamic-text"></h1>
+    <h1 class="dynamic-text">Christian Chartier </h1>
     <p>Integrating AI with Healthcare</p>
 </div>
 <div class="footer">
@@ -54,7 +55,7 @@
 
 <script>
   const dynamicText = document.querySelector('.dynamic-text');
-  const phrases = ["Your AI Healthcare Partner", "Innovative AI Solutions", "Revolutionizing Healthcare"];
+  const phrases = ["loves his cat", "is a llm nerd", "can't wait to go home"];
   let phraseIndex = 0;
   let letterIndex = 0;
   let currentPhrase = [];
@@ -63,20 +64,20 @@
 
   function loop() {
     isEnd = false;
-    dynamicText.innerHTML = currentPhrase.join('');
+    dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
 
     if (phraseIndex < phrases.length) {
       
       if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.push(phrases[phraseIndex][letterIndex]);
         letterIndex++;
-        dynamicText.innerHTML = currentPhrase.join('');
+        dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
       }
 
       if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.pop(phrases[phraseIndex][letterIndex]);
         letterIndex--;
-        dynamicText.innerHTML = currentPhrase.join('');
+        dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
       }
 
       if (letterIndex == phrases[phraseIndex].length) {
