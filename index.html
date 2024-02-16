@@ -1,59 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Healthcare Consultancy</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .main-content {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: #111;
-            color: #33c15d;
-            flex-direction: column;
-        }
-        .footer {
-            background-color: #33c15d;
-            color: #111;
-            width: 100%;
-            padding: 10px 0;
-            position: absolute;
-            bottom: 0;
-            text-align: center;
-        }
-        h1 {
-            font-size: 5em;
-        }
-        .links a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Healthcare Consultancy</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #111;
+    overflow: hidden;
+    color: #fff;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    flex-direction: column;
+  }
+  .dynamic-text {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #8a2be2;
+  }
+  .footer {
+    background-color: #8a2be2;
+    color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+  }
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+</style>
 </head>
 <body>
-    <div class="main-content">
-        <h1>Your Consultancy Name</h1>
-        <p>Integrating AI with Healthcare</p>
-        <div class="links">
-            <a href="mailto:contact@yourconsultancy.com">Email</a>
-            <a href="https://twitter.com/yourconsultancy">Twitter</a>
-            <a href="https://github.com/yourconsultancy">GitHub</a>
-        </div>
-    </div>
-    <div class="footer">
-        <p>AI Healthcare Consultancy</p>
-    </div>
+<div class="container">
+    <h1 class="dynamic-text"></h1>
+    <p>Integrating AI with Healthcare</p>
+</div>
+<div class="footer">
+    <a href="mailto:contact@yourconsultancy.com">Email</a>
+    <a href="https://twitter.com/yourconsultancy">Twitter</a>
+    <a href="https://github.com/yourconsultancy">GitHub</a>
+</div>
+
+<script>
+  const dynamicText = document.querySelector('.dynamic-text');
+  const phrases = ["Your AI Healthcare Partner", "Innovative AI Solutions", "Revolutionizing Healthcare"];
+  let phraseIndex = 0;
+  let letterIndex = 0;
+  let currentPhrase = [];
+  let isDeleting = false;
+  let isEnd = false;
+
+  function loop() {
+    isEnd = false;
+    dynamicText.innerHTML = currentPhrase.join('');
+
+    if (phraseIndex < phrases.length) {
+      
+      if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
+        currentPhrase.push(phrases[phraseIndex][letterIndex]);
+        letterIndex++;
+        dynamicText.innerHTML = currentPhrase.join('');
+      }
+
+      if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
+        currentPhrase.pop(phrases[phraseIndex][letterIndex]);
+        letterIndex--;
+        dynamicText.innerHTML = currentPhrase.join('');
+      }
+
+      if (letterIndex == phrases[phraseIndex].length) {
+        isEnd = true;
+        isDeleting = true;
+      }
+
+      if (isDeleting && letterIndex === 0) {
+        currentPhrase = [];
+        isDeleting = false;
+        phraseIndex++;
+        if (phraseIndex == phrases.length) {
+          phraseIndex = 0;
+        }
+      }
+    }
+    const spedUp = Math.random() * (80 - 50) + 50;
+    const normalSpeed = Math.random() * (300 - 200) + 200;
+    const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+    setTimeout(loop, time);
+  }
+
+  loop();
+</script>
 </body>
 </html>
