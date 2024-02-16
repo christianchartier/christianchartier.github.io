@@ -14,37 +14,37 @@
     color: #fff;
   }
   .container {
-    padding: 150px 200px;
+    padding: 100px 100px;
     box-sizing: border-box;
-    height: calc(100% - 200px); /* Subtract the top padding */
+    height: calc(100% - 100px); /* Subtract the top padding */
     flex-direction: column;
   }
   .dynamic-text {
     font-size: 5rem;
     font-weight: bold;
-    color: #6F8FAF;
+    color: #000000;
     text-align: left; /* Align text to the left */
   }
   .underline {
     display: inline-block;
     height: 2px;
-    background-color: #6F8FAF;
+    background-color: #000000;
     width: 0;
     transition: width 0.2s;
   }
   .cursor {
-    background-color: #6F8FAF;
+    background-color: #000000;
     width: 1ch;
     height: 0.1em;
     display: inline-block;
     animation: blink 0.75s step-end infinite;
   }
   @keyframes blink {
-    from, to { background-color: #6F8FAF; }
+    from, to { background-color: #000000; }
     50% { background-color: transparent; }
   }
   .footer {
-    background-color: #6F8FAF;
+    background-color: #000000;
     color: #fff;
     width: 100%;
     padding: 10px 0;
@@ -93,7 +93,7 @@
 <script>
   const dynamicText = document.querySelector('.dynamic-text');
   const underline = document.querySelector('.underline');
-  const phrases = [" loves his cat", " is an llm nerd", " LOVES JULIA"]; // Removed leading spaces
+  const phrases = [" loves his cat loves his cat loves his cat loves his cat loves his cat loves his cat", " is an llm nerd", " LOVES JULIA"]; // Removed leading spaces
   let phraseIndex = 0;
   let letterIndex = 0;
   let currentPhrase = [];
