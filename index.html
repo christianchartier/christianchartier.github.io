@@ -14,10 +14,9 @@
     color: #fff;
   }
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
+    padding: 150px 200px;
+    box-sizing: border-box;
+    height: calc(100% - 200px); /* Subtract the top padding */
     flex-direction: column;
   }
   .dynamic-text {
@@ -25,6 +24,24 @@
     font-weight: bold;
     color: #8a2be2;
     text-align: left; /* Align text to the left */
+  }
+  .underline {
+    display: inline-block;
+    height: 2px;
+    background-color: #8a2be2;
+    width: 0;
+    transition: width 0.2s;
+  }
+  .cursor {
+    background-color: #8a2be2;
+    width: 1ch;
+    height: 0.1em;
+    display: inline-block;
+    animation: blink 0.75s step-end infinite;
+  }
+  @keyframes blink {
+    from, to { background-color: #8a2be2; }
+    50% { background-color: transparent; }
   }
   .footer {
     background-color: #8a2be2;
@@ -40,13 +57,19 @@
     text-decoration: none;
     margin: 0 15px;
   }
+  .centered-text {
+    position: fixed;
+    bottom: 35px; /* 25px above the footer plus 10px for the footer's padding */
+    width: 100%;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="dynamic-text">Christian Chartier </h1>
-    <p>Integrating AI with Healthcare</p>
+  <h1 class="dynamic-text">Christian Chartier <span class="cursor"></span><span class="underline"></span></h1>
 </div>
+<p class="centered-text">Integrating AI with Healthcare</p>
 <div class="footer">
     <a href="mailto:contact@yourconsultancy.com">Email</a>
     <a href="https://twitter.com/yourconsultancy">Twitter</a>
@@ -55,29 +78,33 @@
 
 <script>
   const dynamicText = document.querySelector('.dynamic-text');
-  const phrases = ["loves his cat", "is a llm nerd", "LOVES JULIA"];
+  const underline = document.querySelector('.underline');
+  const phrases = [" loves his cat", " is an llm nerd", " LOVES JULIA"];
   let phraseIndex = 0;
   let letterIndex = 0;
   let currentPhrase = [];
   let isDeleting = false;
   let isEnd = false;
+  let isPause = false; // Start without a pause
 
   function loop() {
     isEnd = false;
-    dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
+    dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
 
     if (phraseIndex < phrases.length) {
-      
-      if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
+
+      if (isPause) {
+        // Do nothing during the pause
+      } else if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.push(phrases[phraseIndex][letterIndex]);
         letterIndex++;
-        dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
-      }
-
-      if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
+        dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
+        underline.style.width = `${letterIndex}ch`;
+      } else if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.pop(phrases[phraseIndex][letterIndex]);
         letterIndex--;
-        dynamicText.innerHTML = "Christian Chartier " + currentPhrase.join('');
+        dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
+        underline.style.width = `${letterIndex}ch`;
       }
 
       if (letterIndex == phrases[phraseIndex].length) {
@@ -88,19 +115,29 @@
       if (isDeleting && letterIndex === 0) {
         currentPhrase = [];
         isDeleting = false;
+        isPause = true; // Start the pause
         phraseIndex++;
         if (phraseIndex == phrases.length) {
           phraseIndex = 0;
         }
       }
     }
-    const spedUp = Math.random() * (80 - 50) + 50;
-    const normalSpeed = Math.random() * (300 - 200) + 200;
-    const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+    const typingSpeed = 100; // Set a fixed typing speed
+    const deletingSpeed = 50; // Set a fixed deleting speed
+    const pauseTime = 1000; // Set a fixed pause time
+    let time;
+    if (isEnd) {
+      time = 2000;
+    } else if (isPause) {
+      time = pauseTime;
+      isPause = false; // End the pause
+    } else {
+      time = isDeleting ? deletingSpeed : typingSpeed;
+    }
     setTimeout(loop, time);
   }
 
-  loop();
+  setTimeout(loop, 1500);
 </script>
 </body>
 </html>
