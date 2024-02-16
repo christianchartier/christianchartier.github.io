@@ -9,7 +9,7 @@
     height: 100%;
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #111;
+    background-color: #FFFFFF;
     overflow: hidden;
     color: #fff;
   }
@@ -22,29 +22,29 @@
   .dynamic-text {
     font-size: 5rem;
     font-weight: bold;
-    color: #8a2be2;
+    color: #6F8FAF;
     text-align: left; /* Align text to the left */
   }
   .underline {
     display: inline-block;
     height: 2px;
-    background-color: #8a2be2;
+    background-color: #6F8FAF;
     width: 0;
     transition: width 0.2s;
   }
   .cursor {
-    background-color: #8a2be2;
+    background-color: #6F8FAF;
     width: 1ch;
     height: 0.1em;
     display: inline-block;
     animation: blink 0.75s step-end infinite;
   }
   @keyframes blink {
-    from, to { background-color: #8a2be2; }
+    from, to { background-color: #6F8FAF; }
     50% { background-color: transparent; }
   }
   .footer {
-    background-color: #8a2be2;
+    background-color: #6F8FAF;
     color: #fff;
     width: 100%;
     padding: 10px 0;
@@ -63,23 +63,37 @@
     width: 100%;
     text-align: center;
   }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 50px 20px;
+      height: calc(100% - 100px);
+    }
+    .dynamic-text {
+      font-size: 2rem;
+    }
+    .centered-text {
+      bottom: 15px;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1 class="dynamic-text">Christian Chartier <span class="cursor"></span><span class="underline"></span></h1>
+  <h1 class="dynamic-text">Christian <span class="cursor"></span><span class="underline"></span></h1>
 </div>
 <p class="centered-text">Integrating AI with Healthcare</p>
 <div class="footer">
-    <a href="mailto:contact@yourconsultancy.com">Email</a>
-    <a href="https://twitter.com/yourconsultancy">Twitter</a>
-    <a href="https://github.com/yourconsultancy">GitHub</a>
+    <a href="mailto:christian.chartier13@gmail.com">Email</a>
+    <a href="https://twitter.com/chrischarts8">Twitter</a>
+    <a href="https://github.com/christianchartier">GitHub</a>
 </div>
 
 <script>
   const dynamicText = document.querySelector('.dynamic-text');
   const underline = document.querySelector('.underline');
-  const phrases = [" loves his cat", " is an llm nerd", " LOVES JULIA"];
+  const phrases = [" loves his cat", " is an llm nerd", " LOVES JULIA"]; // Removed leading spaces
   let phraseIndex = 0;
   let letterIndex = 0;
   let currentPhrase = [];
@@ -89,7 +103,7 @@
 
   function loop() {
     isEnd = false;
-    dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
+    dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
 
     if (phraseIndex < phrases.length) {
 
@@ -98,12 +112,12 @@
       } else if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.push(phrases[phraseIndex][letterIndex]);
         letterIndex++;
-        dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       } else if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.pop(phrases[phraseIndex][letterIndex]);
         letterIndex--;
-        dynamicText.innerHTML = "Christian Chartier" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       }
 
@@ -122,12 +136,12 @@
         }
       }
     }
-    const typingSpeed = 100; // Set a fixed typing speed
-    const deletingSpeed = 50; // Set a fixed deleting speed
-    const pauseTime = 1000; // Set a fixed pause time
+    const typingSpeed = 75; // Set a fixed typing speed
+    const deletingSpeed = 35; // Set a fixed deleting speed
+    const pauseTime = 150; // Set a fixed pause time
     let time;
     if (isEnd) {
-      time = 2000;
+      time = 1500;
     } else if (isPause) {
       time = pauseTime;
       isPause = false; // End the pause
@@ -137,7 +151,7 @@
     setTimeout(loop, time);
   }
 
-  setTimeout(loop, 1500);
+  setTimeout(loop, 100);
 </script>
 </body>
 </html>
