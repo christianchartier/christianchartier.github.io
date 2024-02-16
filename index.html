@@ -81,7 +81,7 @@
 </head>
 <body>
 <div class="container">
-  <h1 class="dynamic-text">Christian <span class="cursor"></span><span class="underline"></span></h1>
+  <h1 class="dynamic-text">christian <span class="cursor"></span><span class="underline"></span></h1>
 </div>
 <p class="centered-text">Integrating AI with Healthcare</p>
 <div class="footer">
@@ -103,7 +103,7 @@
 
   function loop() {
     isEnd = false;
-    dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+    dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
 
     if (phraseIndex < phrases.length) {
 
@@ -112,12 +112,12 @@
       } else if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.push(phrases[phraseIndex][letterIndex]);
         letterIndex++;
-        dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       } else if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.pop(phrases[phraseIndex][letterIndex]);
         letterIndex--;
-        dynamicText.innerHTML = "Christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       }
 
