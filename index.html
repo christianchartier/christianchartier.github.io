@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Healthcare Consultancy</title>
+<title>christian chartier</title>
 <style>
   body, html {
     height: 100%;
@@ -61,8 +61,8 @@
   .centered-text {
     color: #000000;
     font-weight: bold;
-    position: fixed;
-    bottom: 35px; /* 25px above the footer plus 10px for the footer's padding */
+    position: absolute; /* Change from fixed to absolute */
+    bottom: calc(1% + 35px); /* 10% of the viewport height plus 35px */
     width: 100%;
     text-align: center;
   }
@@ -76,7 +76,7 @@
       font-size: 2rem;
     }
     .centered-text {
-      bottom: 15px;
+      bottom: calc(1% + 15px); /* 10% of the viewport height plus 15px */
     }
   }
 </style>
@@ -89,7 +89,7 @@
 <div class="footer">
     <a href="https://twitter.com/chrischarts8">x</a>
     <a href="mailto:christian.chartier13@gmail.com">email</a>
-    <a href="https://github.com/christianchartier">gitHhb</a>
+    <a href="https://github.com/christianchartier">github</a>
 </div>
 
 <script>
