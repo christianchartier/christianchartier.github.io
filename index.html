@@ -83,7 +83,7 @@
 </head>
 <body>
 <div class="container">
-  <h1 class="dynamic-text">christian <span class="cursor"></span><span class="underline"></span></h1>
+  <h1 class="dynamic-text">christian<span class="cursor"></span><span class="underline"></span></h1>
 </div>
 <p class="centered-text">artificial medical intelligence</p>
 <div class="footer">
@@ -95,17 +95,19 @@
 <script>
   const dynamicText = document.querySelector('.dynamic-text');
   const underline = document.querySelector('.underline');
-  const phrases = [" is a medical doctor", " builds ai-enabled clinical software applications", " uses lora and rag to fine-tune language models"]; // Removed leading spaces
+  const phrases = [" is a medical doctor trained at mcgill university", " builds ai-enabled clinical software applications", " fine-tunes large language models on healthcare data"];
   let phraseIndex = 0;
   let letterIndex = 0;
   let currentPhrase = [];
   let isDeleting = false;
   let isEnd = false;
   let isPause = false; // Start without a pause
+  let isDeletingName = false; // New state to track when we are deleting the name
+  let name = "christian"; // New variable to store "christian"
 
   function loop() {
     isEnd = false;
-    dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+    dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
 
     if (phraseIndex < phrases.length) {
 
@@ -114,12 +116,12 @@
       } else if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.push(phrases[phraseIndex][letterIndex]);
         letterIndex++;
-        dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       } else if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
         currentPhrase.pop(phrases[phraseIndex][letterIndex]);
         letterIndex--;
-        dynamicText.innerHTML = "christian" + currentPhrase.join('') + '<span class="cursor"></span>';
+        dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
         underline.style.width = `${letterIndex}ch`;
       }
 
@@ -133,13 +135,20 @@
         isDeleting = false;
         isPause = true; // Start the pause
         phraseIndex++;
-        if (phraseIndex == phrases.length) {
-          phraseIndex = 0;
-        }
       }
+    } else if (!isDeletingName) {
+      // If all phrases have been looped through, start deleting the name after a pause
+      isDeletingName = true;
+      setTimeout(loop, 2000); // Pause for 2 second before deleting
+    } else if (isDeletingName && name.length > 0) {
+      // Delete the name letter by letter
+      name = name.slice(0, -1);
+      dynamicText.innerHTML = name + '<span class="cursor"></span>';
+      setTimeout(loop, 25);
     }
-    const typingSpeed = 75; // Set a fixed typing speed
-    const deletingSpeed = 35; // Set a fixed deleting speed
+
+    const typingSpeed = 55; // Set a fixed typing speed
+    const deletingSpeed = 25; // Set a fixed deleting speed
     const pauseTime = 150; // Set a fixed pause time
     let time;
     if (isEnd) {
@@ -150,10 +159,12 @@
     } else {
       time = isDeleting ? deletingSpeed : typingSpeed;
     }
-    setTimeout(loop, time);
+    if (!isDeletingName) {
+      setTimeout(loop, time);
+    }
   }
 
-  setTimeout(loop, 100);
+  setTimeout(loop, 1000);
 </script>
 </body>
 </html>
