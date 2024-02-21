@@ -20,6 +20,17 @@
             bottom: 45px; /* 25px above the footer + 20px footer height */
             width: 100%;
             text-align: center;
+            background-color: #ffffff; /* Make the background white */
+            box-shadow: 0 -10px 10px rgba(255, 255, 255, 1); /* White shadow extended for 10 pixels */
+        }
+        .centered-text::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -45px; /* Same as the bottom value of .centered-text */
+            height: 45px; /* Same as the bottom value of .centered-text */
+            background-color: #ffffff; /* Make the background white */
         }
         .footer {
             background-color: #000000;
