@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 2rem;
+            padding-left: 2rem;
+        }
+        .centered-text {
+            color: #000000;
+            font-weight: bold;
+            position: fixed;
+            bottom: 45px; /* 25px above the footer + 20px footer height */
+            width: 100%;
+            text-align: center;
+        }
+        .footer {
+            background-color: #000000;
+            color: #fff;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+        .footer a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        @media (max-width: 768px) {
+            .centered-text {
+            bottom: calc(1% + 30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-8 py-12">
+        <div class="flex flex-col lg:flex-row justify-between">
+            <div class="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
+                <div class="flex-1 space-y-1.5">
+                    <h1 class="text-2xl font-bold">Christian Chartier</h1>
+                    <p class="text-gray-700 mt-4 text-pretty font-mono text-sm text-muted-foreground">Currently I am obsessed with using language models to replicate clinical decision-making. Not focusing on diagnosis.</p>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <p class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"><a class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"><span class="mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe h-3 w-3"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> Montreal</span></a></p>
+                        <a href="#" class="mr-2"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="mr-2"><i class="fas fa-phone-alt"></i></a>
+                        <a href="#" class="mr-2"><i class="fas fa-globe"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="mr-2"><i class="fab fa-xing-square"></i></a>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-bold mt-12">About</h2>
+                <p class="text-gray-700 mt-4 text-pretty font-mono text-sm text-muted-foreground">Resident medical doctor with experience developing ai-enabled software systems for clinical use. Previously a tech and healthcare banker. Put plainly, I aim to make a broad impact by combining technology and medicine.</p>
+                <h2 class="text-3xl font-bold mt-12">Work Experience</h2>
+                <div class="mt-4">
+                    <h3 class="text-2xl font-bold">Jewish General Hospital (McGill University)</h3>
+                    <p class="text-gray-700 mt-1">Resident Physician – Medicine</p>
+                    <p class="text-gray-500 mt-1">2023 - Present</p>
+                    <p class="text-gray-700 mt-1">Training in general, internal, and emergency medicine at Quebec’s largest university-affiliated teaching hospital</p>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-2xl font-bold">Artificial Medical Intelligence</h3>
+                    <p class="text-gray-700 mt-1">AI Developer</p>
+                    <p class="text-gray-500 mt-1">2020 - 2023</p>
+                    <p class="text-gray-700 mt-1">Developed AI models for clinical decision-making, focusing on replicating the decision-making process rather than diagnosis.</p>
+                </div>
+                <h2 class="text-3xl font-bold mt-12">Education</h2>
+                <div class="mt-4">
+                    <h3 class="text-2xl font-bold">McGill University</h3>
+                    <p class="text-gray-700 mt-1">Doctor of Medicine (MD)</p>
+                    <p class="text-gray-500 mt-1">2018 - 2023</p>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-2xl font-bold">University of Montreal</h3>
+                    <p class="text-gray-700 mt-1">Bachelor of Science (BSc) in Computer Science</p>
+                    <p class="text-gray-500 mt-1">2014 - 2018</p>
+                </div>
+                <h2 class="text-3xl font-bold mt-12">Skills</h2>
+                <ul class="list-disc list-inside mt-4 text-gray-700">
+                    <li>AI Development</li>
+                    <li>Medical Knowledge</li>
+                    <li>Programming (Python, JavaScript)</li>
+                    <li>Data Analysis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="centered-text">artificial medical intelligence</p>
+    <div class="footer">
+        <a href="https://twitter.com/chrischarts8">x</a>
+        <a href="mailto:christian.chartier13@gmail.com">email</a>
+        <a href="https://github.com/christianchartier">github</a>
+    </div>
+    </body>
+    </html>
