@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>christian chartier</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    color: #fff;
+  }
+  .container {
+    padding: 100px 100px;
+    box-sizing: border-box;
+    height: calc(100% - 100px); /* Subtract the top padding */
+    flex-direction: column;
+  }
+  .dynamic-text {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #000000;
+    text-align: left; /* Align text to the left */
+  }
+  .underline {
+    display: inline-block;
+    height: 2px;
+    background-color: #000000;
+    width: 0;
+    transition: width 0.2s;
+  }
+  .cursor {
+    background-color: #000000;
+    width: 1ch;
+    height: 0.1em;
+    display: inline-block;
+    animation: blink 0.75s step-end infinite;
+  }
+
+  .cursor-fade {
+  animation: blink 0.75s step-end infinite, fadeOut 2s linear forwards;
+}
+
+  @keyframes blink {
+    from, to { background-color: #000000; }
+    50% { background-color: transparent; }
+  }
+
+  @keyframes fadeOut {
+    to { background-color: transparent; }
+  }
+  .footer {
+    background-color: #000000;
+    color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+  }
+  .footer a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+  .centered-text {
+    color: #000000;
+    font-weight: bold;
+    position: absolute; /* Change from fixed to absolute */
+    bottom: calc(1% + 35px); /* 10% of the viewport height plus 35px */
+    width: 100%;
+    text-align: center;
+  }
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 50px 20px;
+      height: calc(100% - 100px);
+    }
+    .dynamic-text {
+      font-size: 2rem;
+    }
+    .centered-text {
+      bottom: calc(1% + 30px); /* 10% of the viewport height plus 15px */
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="dynamic-text">christian chartier<span class="cursor"></span><span class="underline"></span></h1>
+</div>
+<p class="centered-text">artificial medical intelligence</p>
+<div class="footer">
+    <a href="https://twitter.com/chrischarts8">x</a>
+    <a href="mailto:christian.chartier13@gmail.com">email</a>
+    <a href="https://github.com/christianchartier">github</a>
+</div>
+
+<script>
+  const dynamicText = document.querySelector('.dynamic-text');
+  const underline = document.querySelector('.underline');
+  const phrases = [" test1", " test2", " test3"];
+  //const phrases = [" is a medical doctor trained at mcgill university", " builds ai-enabled clinical software applications", " fine-tunes large language models on healthcare data"];
+  let phraseIndex = 0;
+  let letterIndex = 0;
+  let currentPhrase = [];
+  let isDeleting = false;
+  let isEnd = false;
+  let isPause = false; // Start without a pause
+  let isDeletingName = false; // New state to track when we are deleting the name
+  let name = "christian chartier"; // New variable to store "christian chartier"
+
+  function loop() {
+    isEnd = false;
+    dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
+
+    if (phraseIndex < phrases.length) {
+
+      if (isPause) {
+        // Do nothing during the pause
+      } else if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
+        currentPhrase.push(phrases[phraseIndex][letterIndex]);
+        letterIndex++;
+        dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
+        underline.style.width = `${letterIndex}ch`;
+      } else if(isDeleting && letterIndex <= phrases[phraseIndex].length) {
+        currentPhrase.pop(phrases[phraseIndex][letterIndex]);
+        letterIndex--;
+        dynamicText.innerHTML = name + currentPhrase.join('') + '<span class="cursor"></span>';
+        underline.style.width = `${letterIndex}ch`;
+      }
+
+      if (letterIndex == phrases[phraseIndex].length) {
+        isEnd = true;
+        isDeleting = true;
+      }
+
+      if (isDeleting && letterIndex === 0) {
+        currentPhrase = [];
+        isDeleting = false;
+        isPause = true; // Start the pause
+        phraseIndex++;
+      }
+    } else if (!isDeletingName) {
+      // If all phrases have been looped through, start deleting the name after a pause
+      isDeletingName = true;
+      setTimeout(loop, 1500); // Pause for 1.5 seconds before deleting
+    } else if (isDeletingName && name.length > 0) {
+      // Delete the name letter by letter
+      name = name.slice(0, -1);
+      dynamicText.innerHTML = name + '<span class="cursor"></span>';
+      setTimeout(loop, 0);
+    } else if (isDeletingName && name.length === 0) {
+    // Add the cursor-fade class to the cursor to start the fade out animation
+    dynamicText.innerHTML = name + '<span class="cursor cursor-fade"></span>';
+    }
+
+    const typingSpeed = 50; // Set a fixed typing speed
+    const deletingSpeed = 25; // Set a fixed deleting speed
+    const pauseTime = 150; // Set a fixed pause time
+    let time;
+    if (isEnd) {
+      time = 1500;
+    } else if (isPause) {
+      time = pauseTime;
+      isPause = false; // End the pause
+    } else {
+      time = isDeleting ? deletingSpeed : typingSpeed;
+    }
+    if (!isDeletingName || (isDeletingName && name.length > 0)) {
+      setTimeout(loop, time);
+    }
+  }
+
+  setTimeout(loop, 1000);
+</script>
+</body>
+</html>
