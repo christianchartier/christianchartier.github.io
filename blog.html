@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>Christian Chartier, MD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+                .container {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 2rem;
+            padding-left: 2rem;
+        }
+        .bg-hover {
+            background-color: rgba(17, 24, 39, 0.8);
+            color: #ffffff; /* White text color */
+        }
+
+        .bg-hover:hover {
+            background-color: rgba(17, 24, 39, 0.6);
+        }
+        .centered-text {
+            color: #000000;
+            font-weight: bold;
+            position: fixed;
+            bottom: 40px; /* 25px above the footer + 20px footer height */
+            width: 100%;
+            text-align: center;
+            background-color: #ffffff; /* Make the background white */
+            box-shadow: 0 -10px 10px rgba(255, 255, 255, 1); /* White shadow extended for 10 pixels */
+        }
+        .centered-text::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -45px; /* Same as the bottom value of .centered-text */
+            height: 45px; /* Same as the bottom value of .centered-text */
+            background-color: #ffffff; /* Make the background white */
+        }
+        .footer {
+            background-color: #000000;
+            color: #fff;
+            width: 100%;
+            padding: 5px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+        .footer a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        @media (max-width: 768px) {
+            .centered-text {
+            bottom: calc(1% + 30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
+        <section class="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="flex-1 space-y-1.5">
+                    <h1 class="text-2xl font-bold">Christian Chartier, MD</h1>
+                </div>
+            </div>
+        </section>
+    </main>
+    <br>
+    <p class="centered-text">building artificial medical intelligence</p>
+    <div class="footer">
+        <a href="https://christianchartier.github.io/">cv</a>
+        <a href="">work with me</a>
+    </div>
+</body>
+</html>
