@@ -10,7 +10,10 @@
       margin-right: 0;
       margin-left: 0;
       padding-right: 2rem;
-      padding-left: 10px;
+      padding-left: 0;
+    }
+    .text-pretty {
+      color: #6B7280;
     }
     .bg-hover {
       background-color: rgba(17, 24, 39, 0.8);
@@ -89,15 +92,19 @@
   </script>
 </head>
 <body>
-  <div class="container">
-    <h1 class="text-xl font-bold">Complaint Form</h1>
-    <form onsubmit="handleSubmit(event)">
-      <label for="complaint" class="font-bold">Enter your chief complaints, separated by commas:</label><br><br>
-      <input type="text" id="complaint" name="complaint" required class="border px-2 py-1 rounded"><br><br>
-      <input type="submit" value="Submit" class="bg-hover cursor-pointer rounded px-4 py-2">
-    </form>
-    <pre id="response" class="p-2"></pre>
-  </div>
+  <main class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
+    <section class="mx-auto w-full space-y-8 bg-white print:space-y-6" style="max-width: 775px;">
+      <section class="flex min-h-0 flex-col gap-y-3">
+      <h2 class="text-2xl font-bold">Complaint Form</h2>
+      <form onsubmit="handleSubmit(event)" class="text-pretty font-mono text-sm">
+        <label for="complaint" class="text-pretty font-mono mt-2 text-xs inline-flex items-center justify-center gap-x-1 leading-none" style="color: #6B7280;">Enter your chief complaints, separated by commas:</label><br>
+        <input type="text" id="complaint" name="complaint" required class="border px-2 py-1 rounded mt-2" style="width: 100%;"><br>
+        <input type="submit" value="Submit" class="inline-flex items-center rounded-md border px-2 py-0.5 font-semibold font-mono transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-nowrap border-transparent text-secondary-foreground hover:bg-secondary/60 align-middle text-xs mt-2" style="background-color: #F3F4F6;">
+      </form>
+      <pre id="response" class="text-pretty font-mono mt-2 text-xs p-2" style="color: #6B7280; white-space: pre-wrap;"></pre>
+    </section>
+    </section>
+  </main>
   <p class="centered-text">building artificial medical intelligence</p>
   <div class="footer">
     <a href="index.html">cv</a>
