@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Complaint Form</title>
+  <script>
+    async function handleSubmit(event) {
+      event.preventDefault();
+
+      const complaint = document.getElementById('complaint').value;
+      try {
+        const response = await fetch('https://1370-worker.christian-chartier.workers.dev/api/complaint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ complaint })
+        });
+
+        if (response.ok) {
+          const responseText = await response.text();
+          console.log("Response Text:", responseText);
+          document.getElementById('response').innerHTML = responseText;
+        } else {
+          console.error("Error:", response.status);
+          document.getElementById('response').innerHTML = "Error: " + response.status;
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById('response').innerHTML = "Error: " + error.message;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Complaint Form</h1>
+  <form onsubmit="handleSubmit(event)">
+    <label for="complaint">Enter your chief complaints, separated by commas:</label><br>
+    <input type="text" id="complaint" name="complaint" required><br>
+    <input type="submit" value="Submit">
+  </form>
+  <h2>Response:</h2>
+  <pre id="response"></pre>
+</body>
+</html>
